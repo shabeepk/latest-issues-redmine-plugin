@@ -18,8 +18,8 @@ class LatestIssuesViewHookListener < Redmine::Hook::ViewListener
 
         def load_setup()
             
-	    #setup = LatestIssuesSetup.find_by_id(1)
-            setup = nil
+	    setup = LatestIssuesSetup.find_by_id(1)
+            #setup = nil
 	    if setup == nil
                 count = LatestIssuesSetup::DEFAULT_COUNT
                 side  = LatestIssuesSetup::DEFAULT_SIDE
