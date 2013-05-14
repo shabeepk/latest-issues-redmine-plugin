@@ -1,0 +1,43 @@
+<% require File.join(File.dirname(__FILE__), '../../models/latest_issues_setup') %>
+  <p><%= form.check_box(:textilizable) %></p>
+<% end %>
+
+<% def load_setup()
+	setup = LatestIssuesSetup.find_by_id(1)
+	if setup == nil
+			count = LatestIssuesSetup::DEFAULT_COUNT
+			side  = LatestIssuesSetup::DEFAULT_SIDE
+		else
+			count = setup.max_count
+			side  = setup.side
+		end
+
+		{:count => count, :side => side}
+	end
+<% end %>
+
+<div class="box" id="statuses">
+	<h3 class="icon22 icon22-users">Latest Issues</h3>
+	<ul>
+	<%
+		setup = load_setup()
+		count = setup[:count]
+		issues  = Issue.visible(User.current).find(:all, :limit => count, :order => "issues.created_on DESC")
+		issues.each do |issue| %>
+		<li>
+		<%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue
+		(<%= format_time(issue.created_on) %>)
+		<%= issue.assigned_to ? 'assigned to ' + link_to_user(issue.assigned_to) : " not assigned" %>
+		</li>
+	%>
+	</ul>
+</div>
+
+        
+
+        def load_issues(count)
+            html = ''
+            html += ''
+            html += '</ul></div>'
+            return html
+        end
