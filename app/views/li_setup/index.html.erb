@@ -1,5 +1,5 @@
 <h2>Latest Issues Configuration</h2>
-    <%= form_tag("/latest-issues/change") do %>
+    <%= form_tag("latest-issues/change") do %>
     <dl>
         <label>Number of issues on page:</label>
         <input type="text" maxsize="2" name="count" value="<%= @setup.max_count %>"/>
